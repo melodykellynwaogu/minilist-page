@@ -5,8 +5,8 @@
 }
 
 body {
-    font-family: 'segeo UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: lnear-gradient(to right, #e0eafc, #cfdef3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
     color: #333;
     min-height: 100vh;
     display: flex;
@@ -20,76 +20,100 @@ body {
     width: 100%;
     text-align: center;
 }
+
 .pricing-table h1 {
     font-size: 2.5rem;
     margin-bottom: 30px;
     color: #2c3e50;
+    letter-spacing: 1px;
 }
 
 .plans {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 24px;
 }
 
 .plan {
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 30px 20px;
-    width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.09);
+    padding: 36px 24px;
+    width: 310px;
+    transition: transform 0.3s cubic-bezier(.4,2,.3,1), box-shadow 0.3s;
+    position: relative;
+    animation: fadeInUp 0.8s cubic-bezier(.4,2,.3,1) forwards;
+    opacity: 0;
 }
 
-.plan:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+.plan:nth-child(1) { animation-delay: 0.2s; }
+.plan:nth-child(2) { animation-delay: 0.35s; }
+.plan:nth-child(3) { animation-delay: 0.5s; }
+
+.plan:hover, .plan.featured {
+    transform: translateY(-10px) scale(1.04);
+    box-shadow: 0 16px 32px rgba(52, 152, 219, 0.18);
+    z-index: 1;
+}
+
+.featured {
+    border: 2.5px solid #3498db;
+    background: linear-gradient(145deg, #f0f9ff 80%, #e0eafc 100%);
 }
 
 .plan h2 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #333;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: #3498db;
+    letter-spacing: 0.5px;
 }
 
 .price {
-    font-size: 2.2rem;
-    color: #3498db;
-    margin: 10px 0 20px;
+    font-size: 2.3rem;
+    color: #2c3e50;
+    margin: 13px 0 24px;
+}
+.price span {
+    font-size: 1.1rem;
+    color: #666;
 }
 
 .plan ul {
     list-style: none;
-    margin-bottom: 25px;
+    margin-bottom: 26px;
 }
 
 .plan ul li {
-    margin: 10px 0;
-    font-size: 1rem;
+    margin: 13px 0;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
 }
 
 .plan ul li i {
-    color: #333;
+    color: #3498db;
+    font-size: 1.08em;
 }
 
 button {
     background: #3498db;
     color: #fff;
     border: none;
-    padding: 12px 25px;
-    border-radius: 6px;
+    padding: 13px 30px;
+    border-radius: 7px;
     cursor: pointer;
     font-size: 1rem;
-    transition: background 0.3s ease;
+    font-weight: 500;
+    transition: background 0.28s, box-shadow 0.28s;
+    box-shadow: 0 2px 8px rgba(52,152,219,0.07);
 }
 
-button:hover {
-    background: #2980b9;
-}
-
-.featured {
-    border: 2px solid #3498db;
+button:hover, .plan.featured button {
+    background: #217dbb;
+    box-shadow: 0 4px 16px rgba(52,152,219,0.12);
 }
 
 @media (max-width: 992px) {
@@ -97,57 +121,57 @@ button:hover {
         flex-direction: column;
         align-items: center;
     }
-
     .plan {
-        width: 90%;
-        max-width: 400px;
+        width: 94%;
+        max-width: 420px;
     }
 }
 
-@media (max-width) {
+@media (max-width: 600px) {
     .pricing-table h1 {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
-
     .plan h2 {
-        font-size: 1.3rem;
+        font-size: 1.18rem;
     }
-
     .price {
-        font-size: 2rem;
+        font-size: 1.6rem;
     }
-
     button {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
         padding: 10px 20px;
     }
+    .plan {
+        padding: 22px 10px;
+    }
 }
 
+/* Animation */
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
-
     to {
         opacity: 1;
-        transform: traslateY(0);
+        transform: translateY(0);
     }
 }
-
-.plan {
-    animation: fadeInUp 0.6s ease forwards;
-    opacity: 0;
-}
-
-.plan:nth-child(1) {
-    animation-delay: 0.3s;
-}
-
-.plan:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.plan:nth-child(3) {
-    animation-delay: 0.5s;
+@media (max-width: 600px) {
+    .pricing-table h1 {
+        font-size: 2rem; /* increase from 1.6rem */
+    }
+    .plan h2 {
+        font-size: 1.3rem; /* increase from 1.18rem */
+    }
+    .price {
+        font-size: 2rem; /* increase from 1.6rem */
+    }
+    button {
+        font-size: 1.1rem; /* increase from 0.95rem */
+        padding: 14px 24px; /* bigger buttons */
+    }
+    .plan {
+        padding: 28px 12px; /* slightly more padding */
+    }
 }
